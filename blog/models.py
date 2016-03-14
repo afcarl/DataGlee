@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+#from .models import Post
+from django.shortcuts import render
 
 class Post(models.Model):
 	author = models.ForeignKey('auth.User')
