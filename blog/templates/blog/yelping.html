@@ -1,0 +1,56 @@
+
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    
+        <div >
+            
+            <h1>Yelp-ing</h1>
+            <p>One of the many things to get enchanted by in the city of New York is the wide range of gourmand celebration that it exhibits. According to Bloomberg, the city of New York ranks fourth in the ‘Most Eateries Per Capita’ in line to SF,Seatle, and Boston. And for a newbie (like me) I had to find a way through the avenues and streets to take to just the “right places”. Though I gained initial recommendations from friends (and I also checked off a few restaurants I had always wanted to go after following Bon Appetit for the longest time), YELP became my go-to app soon. I actually played around a very novel feature called “Monocle” that helps you get the restaurants around you be letting you sketch the area around you.
+            </p>
+
+            <p>
+            	Also, part of one course (Spatial Analytics) that I took at NYU, required me to do a project in spatial mapping in ArcGIS. The topic that my team decided to work on was: 
+<i>“The project plans to answer an exploratory research question pertaining to the recent studies of how Yelp Dataset can help Department of Health(DOH) in inspection of restaurant that may require pressing attention based on Yelp star ratings (and user reviews) for a particular area/restaurant.”</i>
+
+            </p>
+
+            <p>The inspiration came from <a href="http://www.cdc.gov/mmwr/preview/mmwrhtml/mm6320a1.htm">CDC's paper</a>
+And the project slides can be found <a href="(https://docs.google.com/presentation/d/13EXcjwGYjI6GjSRyBLJQlnQiPlIZWyKJ-WxJ6tX0_iY/edit#slide=id.gdba7b1ff6_5_1)">here </a>
+</p>
+            <p>My team, realizing that I was an ardent Yelp fan, gave me the responsibility to collect Yelp data specific to New York city. As this was more of a “spatial mapping based visualization” project, the need to see if Yelp ratings and Inspection grades match or not was decided. Another very simple backtesting was to see if Yelp rating of one year for a restaurant is corresponding to the Inspection rating the next year. If this is true for a decent percentage of restaurants then great, else we could look into the reviews- and check for alert/red flag words like – rats, food poisoning, etc.</p>
+            <p>So the first step was to use the Yelp API (Oh what a wonderful thing !)
+Yelp API is one of the easiest to use but like all APIs – YOU NEED TO GET THE DOCUMENTATION RIGHT. The website of Yelp gives a good description of each parameters and different kind of API- business/search. (YES- They love open source)
+</p>
+            <p>I initially played around with the API by learning from <a href="http://letstalkdata.com/2014/02/how-to-use-the-yelp-api-in-python/">Let’s Talk Data website too </a> </p>
+
+            <p><a href="https://github.com/priyakhokher/DataGleeDownloadables/blob/master/YelpNYCRatings.py">My Scripts can be here viewed here</a></p>
+
+            <p><b>How I went about it ?</b></p>
+
+            <ol>
+            	<li>I had the DOH Inspection data from NYC Open Data. We geocoded it with Python</li>
+            	<li>I used Yelp API by adding the restaurant’s name and street address and fetched the star ratings and put them in a separate file. </li>
+            	<li>To take care of cases where the API might fail </li>
+            	<ul>
+            		<li>When that restaurant in not listed on Yelp</li>	
+            		<li>When address search parameter is amiss</li>
+            	</ul>
+            </ol>
+        <p>I used except and passed it saying that – It’s okay if you couldn’t fetch this restaurant, add 0 to the rating and move ahead with the next restaurant in inspection file.
+Using this code alone, you should be able to fetch the star ratings. This is NYC specific because of the address used. 
+</p>
+
+<p>The data collected helped us in making maps for the city, but I wanted to see how the city looked like with all its restarants and ARCScene helped me in it</p>
+<p><b>3D WALK IN NYC</b></p>
+<img src="{% static "blog/intro.gif" %}" alt="My image"/>
+<p>You can see that Manhattan is densely populated with restaurants. It is encoded with height being the better grading score given by restuarants and the darker the color the better the yelp rating(dark blue for 5, light blue for 4). For an alert effect, the red lines indicate "food poisoning" words occuring in the reviews that were scraped from the yelp website(I used Beautiful Soup for it)</p>
+<p>The idea of a 3D model was that for a health inspection team to have an entire city model in front of their eyes, so that they can chose where to go. This model is not dynamic which would actually be more useful(as in it is not currently scraping the website or using the website).  As it was too dense, filtering out just one Cuisine - we could explore better. Even for a urban citizens to use. Here we filtered out all Pizzerias (our Prof. Himanshu Mistry at NYU is a Pizza Buff he had told us once) and see how he/anyone flies through the model</p>
+
+<img src="{% static "blog/him.gif" %}" alt="My image"/>
+
+    </div>
+    
+
+{% endblock content %}
