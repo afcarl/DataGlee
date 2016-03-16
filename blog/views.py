@@ -12,3 +12,7 @@ def post_detail(request, pk):
 
 def yelping(request):
 	return render(request, 'blog/yelping.html')
+
+def IndianRailways(request):
+	return render(request, 'blog/IndianRailways.html')
+

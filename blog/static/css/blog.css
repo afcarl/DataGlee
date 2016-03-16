@@ -13,6 +13,9 @@
 .content {
     margin-left: 40px;
 }
+.container {
+      display:inline-block;
+    }
 
 h1, h2, h3, h4 {
     font-family: 'Lobster', cursive;
