@@ -1,11 +1,25 @@
 {% extends 'blog/base.html' %}
-
+{% load staticfiles %}
 {% block content %}
-    
-        <div class="post">
+        <div class="container">
+            <!-- <img src="{% static "blog/PriyaSinghKhokher.jpg" %}" alt="My image" height="560" width="560"/> -->
+             <p>   
+            Hi,</p>
+            <p>I am Priya. </p>
+            <p>I am currently a graduate student at New York University pursuing Master's in Informatics and a Data Scientist aspirant. Informatics is a field that has a blend of Information Science and Computer Science. Basically, I work with DATA. </p>
+            <p>The beauty of working with Data is that along with computing you get to perform exclusive analysis like NLP, Social Network Analysis and statists therby wearing hat of a Linguist, Network Analyst and statistician repectively. </p>
+            <p>
+            In the few months at NYU, I have been exploded with the umpteen number of tools,projects,people developing ways to use information to enhance insight. And I truly believe that THIS is the place to be, if you are want to endeavour for something new</p>
+            <p>
+            This blog is effort in documenting all the cool (and sometimes not so cool :D ) projects that I do. I named my blog Data GLEE because even though "DATA" is used in a technical sense, it appeals to me as a delight ! And as John Keats has said , <i>'A thing of beauty is a joy forever!' </i>
+            </p>
             
-            <h1><a href="{%url 'yelping'%}">Yelp-ing</a></h1>
-            <h1><a href="{%url 'IndianRailways'%}">Indian Railway Connections</a><h1>
+        </div>
+    
+        <div class="post" >
+            <h5 style="font-size:30px"><b>I LOOK AT THE WORLD THROUGH DATA-TINTED GLASSES</b></h5>
+            <h5 style="font-size:20px"><a href="{%url 'yelping'%}">Yelp-ing The Way To Inpection</a></h5>
+            <h5 style="font-size:20px"><a href="{%url 'IndianRailways'%}">Indian Railway Connections</a><h5s>
         
     </div>
     
