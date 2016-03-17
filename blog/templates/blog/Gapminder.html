@@ -1,0 +1,215 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+          
+        <h1>Gapminder- Wealth of Nation</h1>
+    </br>
+        <h5>Countries</h5>
+        
+        
+        <div>
+        <svg id= "viz" width="620" height="420" transform="translate(40,20)" fill='none' stroke='black' stroke-width='5' padding="15" >
+            <g id="dotGroup" fill="none" >
+                <ul id="list" ></ul>
+            </g>
+        </svg>
+        </div>
+        <input id="yearSelect" onchange="setYear(this.value)" type="range" min="1900" max="2009" value="2008" style="width: 500">
+            
+        <div id="tooltip">Tooltip</div>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script>
+            var year = 2008;
+            var data = []
+            
+            
+            function dataLoading(){
+            d3.json("https://raw.githubusercontent.com/CristianFelix/infoviz/master/Week%203/newData.json", function(error,result){
+                
+                //data = [];
+                var result1 = result.filter(function(d) {return (d.income[year]!=undefined && d.population[year]!=undefined && d.lifeExpectancy[year]!=undefined)});
+//                result1 = result1.filter(function(d) {return d.population[year]!=undefined});
+//                result1 = result1.filter(function(d) {return d.lifeExpectancy[year]!=undefined});
+//                
+//                
+                result1.sort(function(a,b){return d3.ascending(a.name, b.name)});
+                data = result1;
+                
+                
+                var selection = d3.select("#list")
+                    .selectAll("li")
+                    .data(result1,function(d){return d.name});
+                //selection.exit().remove();
+                result1.sort(function(a,b){return d3.ascending(a.name, b.name)});
+                selection
+                    //.data(result1)//,function(d){return d.name});
+                    .enter()
+                    .append("li")
+                    
+                    .text(function(d){return d.name})
+                    .on("mouseenter",function(d,i){highlight(d.name)})
+                    .on("mouseleave",function(d,i){unhighlight()})
+                selection.exit().remove();
+                render(result1);
+            })}
+            
+            
+            
+            //var viz = d3.select("#div");
+            var viz1 = d3.select('#dotGroup');
+            var chart = d3.select('#viz');
+            var list = d3.select("#list");
+            var yearLabel = chart.append("text")
+                .text(year)
+                .style({"font-size":50, "fill":"#ccc"})
+                .attr("dx",50)
+                .attr("dy",50)
+                .attr("dy",70)
+            
+            
+            var width = 600,
+            height = 400,
+            margin = {top:90, left:20 ,right:20, bottom:20},
+            innerWidth = width - margin.left - margin.right,
+            innerHeight = height - margin.top - margin.bottom;
+            
+            var colorScale = d3.scale.category10();
+            
+            var yScale = d3.scale.linear()
+            .range([innerHeight,0])
+            
+            var xScale = d3.scale.linear()
+            .range([0,innerWidth])
+            
+            
+            var xAxisGroup = chart.append("g")
+                            .attr("transform", "translate("+ margin.left +","+(innerHeight+margin.top)+")");
+                             
+                 
+            /* 
+            var xAxisGroup = viz1.append("g")
+                             .attr("transform", "translate("
+                                   + margin.left 
+                                   +","
+                                   +(innerHeight+margin.top)+")");
+             */    
+            var yAxisGroup = viz1.append("g")
+                            .attr("transform", "translate("+ 0 +","+0+")");
+            
+            var rad = d3.scale.linear().range([5, 500])
+            
+            var dotGroup = viz1.attr("transform", "translate("+ 25 +","+margin.top+")");
+            
+            dataLoading();
+            //var dataPoints = viz1.selectAll("circle").data(data);
+            //    dataPoints.enter().append("circle");
+            
+            //dataPoints.exit().remove();
+            
+            
+            function highlight(name){
+            dotGroup.selectAll("circle").style("stroke", function(d,i){return d.name == name? "black":undefined}) //d3.select(this).style({stroke: "black"});
+            
+            list.selectAll("li")
+            .style("background-color",function(d,i){
+                return d.name==name ? "black":undefined 
+            })
+            .style("color",function(d,i){
+                return d.name==name ? "white":undefined 
+            })
+            
+            }
+         
+            function unhighlight(){
+              dotGroup.selectAll("circle").style("stroke", undefined) //d3.select(this).style({stroke:undefined}); 
+              
+              list.selectAll("li")
+            .style("background-color",undefined)
+            .style("color",undefined) 
+            
+            }
+            
+            function setYear(newYear){
+                
+                year = newYear;
+                console.log(year);
+                yearLabel.text(year);
+                dataLoading();
+            }
+            
+            function render(data2)
+            {
+               console.log(data2);    
+               
+                
+               chart
+                    .attr("width",width)
+                    .attr("height",height)
+                
+               var dataPoints = viz1.selectAll("circle").data(data2);
+               
+               dataPoints.exit().remove()  
+                
+                
+                colorScale.domain(d3.extent(data2, function(d){return d.region}));
+                
+                xScale.domain([-500,d3.max(data2, function(d){return d.income[year]})]);
+                
+                yScale.domain(d3.extent(data2 , function(d){return d.lifeExpectancy[year]}));
+                
+                rad.domain(d3.extent(data2, function(d){return d.population[year]}));
+       
+                dotGroup.selectAll("circle")
+                    .data(data2)
+                    .enter()
+                    .append("circle")
+                    .on("click", function(d,i){
+                    alert(d.name);
+                })
+                .on("mouseenter",function(d,i){
+                   //d3.event
+                   //d3.mouse
+                    highlight(d.name);
+                    d3.select("#tooltip").style({visbility:"visible", top: d3.event.clientY,left:d3.event.clientX,opacity:1}).text(d.name);
+                    })
+                    
+                .on("mouseleave",function(d,i){
+                        
+                        unhighlight(d.name);
+                        d3.select("#tooltip").style({visbility:"hidden",opacity:0});
+               
+                        
+                    })
+                
+               
+               dotGroup.selectAll("circle").transition()
+                    .attr('r', function(d,i) {return Math.sqrt(rad(d.population[year])) })
+                    .attr("cx", function(d,i){ return xScale(d.income[year]) })
+                    .attr("cy", function(d,i){ return yScale(d.lifeExpectancy[year]) })
+                    .attr("fill",function(d,i) {return colorScale(i)})
+                    .attr("stroke",function(d,i) {return colorScale(i)}) 
+                    .attr("opacity",0.7)
+                
+                var xAxis = d3.svg.axis()
+                        .tickSize(-290)
+                        .tickFormat(function(d){
+                            var prefix = d3.formatPrefix(d);
+                            return prefix.scale(d)+prefix.symbol
+                        })
+                        .scale(xScale)
+                        .orient("bottom")
+                
+                var yAxis = d3.svg.axis()
+                        .tickSize(-555)
+                        .scale(yScale)
+                        .orient("left")
+                 
+                xAxisGroup.call(xAxis);
+                yAxisGroup.call(yAxis);
+                
+                
+            }
+        </script>
+{% endblock content %}

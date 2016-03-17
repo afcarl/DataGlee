@@ -58,3 +58,36 @@ h5{
 .post h5 a, .post h5 a:visited {
     color: #000000;
 }
+
+ul{
+                float: left;
+                list-style: none;
+            }
+            
+            .domain{
+                stroke-width: 0.8;
+                fill: none;
+                stroke : #ccc;
+            }
+            
+            .tick{
+                stroke-width: 0.8;
+                opacity: 0.7;   
+                font-size: 12;
+            }
+            
+            .tick line{
+                fill: none; 
+                stroke: #ccc;
+            }
+            
+            #tooltip{
+                position : absolute;
+                top: 0;
+                left:0;
+                background-color: rgba(255,255,255,0.8);
+                padding:5;
+                border: solid 1px black;
+                transition: "all 0.5s";
+                opacity: 1
+            }
