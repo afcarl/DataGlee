@@ -119,5 +119,5 @@ def start(name):
 		s = youtube_search(args)
 		s.insert(0,name)
 		return s
-	except HttpError, e:
-		print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
+	except e:
+		print(e)
