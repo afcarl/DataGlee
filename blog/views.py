@@ -10,7 +10,7 @@ from django.template import loader
 from django.template import RequestContext
 from django.shortcuts import render
 import blog.trial
-import blog.playlist 
+import blog.playlist as playlist
 
 def homepage(request):
 	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -38,5 +38,5 @@ def Youtube(request):
 		#Do your stuff ,calling whatever you want from set_gpio.py
 		return render(request, 'blog/Youtube.html',{'post1':post1,'s':s[1:],'a':a})		
 	else:
-		post1 = blog.playlist.playlist_id()
+		post1 = playlist.playlist_id()
 		return render(request, 'blog/Youtube.html',{'post1': post1})
