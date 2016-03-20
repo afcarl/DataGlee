@@ -90,8 +90,8 @@ def youtube_search(options):
 	for search_result in search_response.get("items", []):
 		if search_result["id"]["kind"] == "youtube#video":
 	  		videos.append("%s (%s)" % (search_result["snippet"]["title"],search_result["id"]["videoId"]))
-	elif search_result["id"]["kind"] == "youtube#channel":
-		channels.append("%s (%s)" % (search_result["snippet"]["title"], search_result["id"]["channelId"]))
+		elif search_result["id"]["kind"] == "youtube#channel":
+			channels.append("%s (%s)" % (search_result["snippet"]["title"], search_result["id"]["channelId"]))
 
 	for i in range(10):
   		try:
