@@ -62,97 +62,61 @@ country_playlist = {
 
 
 def youtube_search(options):
+	elements = []
+	pl_id = options['pl_id']
+	youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
+	# Call the search.list method to retrieve results matching the specified
+		# query term.
+	search_response = youtube.search().list(
+		q=options['q'],
+		part="id,snippet",
+		#chart="mostPopular",
+		maxResults=5,
+		regionCode=options['regionCode']
+	).execute()
+	new_response =  youtube.playlistItems().list(
+		part="id,snippet",
+		maxResults=5,
+		playlistId=pl_id
+	).execute()
 
-	  elements = []
-	  pl_id = options['pl_id']
-	  youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
-	    developerKey=DEVELOPER_KEY)
+	videos = []
+	channels = []
+	playlists = []
+	new_response_list = []
+	image_urls_list = []	
+	# Add each result to the appropriate list, and then display the lists of
+	# matching videos, channels, and playlists.
+	for search_result in search_response.get("items", []):
+		if search_result["id"]["kind"] == "youtube#video":
+	  		videos.append("%s (%s)" % (search_result["snippet"]["title"],search_result["id"]["videoId"]))
+	elif search_result["id"]["kind"] == "youtube#channel":
+		channels.append("%s (%s)" % (search_result["snippet"]["title"], search_result["id"]["channelId"]))
 
-
-  # Call the search.list method to retrieve results matching the specified
-  # query term.
-  	  search_response = youtube.search().list(
-	    q=options['q'],
-	    part="id,snippet",
-	    #chart="mostPopular",
-	    maxResults=5,
-	    regionCode=options['regionCode']
-	  ).execute()
-	  new_response =  youtube.playlistItems().list(
-	    part="id,snippet",
-	    maxResults=5,
-
-	    playlistId=pl_id
-	  ).execute()
-
-	  videos = []
-	  channels = []
-	  playlists = []
-	  new_response_list = []
-	  image_urls_list = []	
-	  # Add each result to the appropriate list, and then display the lists of
-	  # matching videos, channels, and playlists.
-	  for search_result in search_response.get("items", []):
-	    if search_result["id"]["kind"] == "youtube#video":
-	      videos.append("%s (%s)" % (search_result["snippet"]["title"],
-	                                 search_result["id"]["videoId"]))
-	    elif search_result["id"]["kind"] == "youtube#channel":
-	      channels.append("%s (%s)" % (search_result["snippet"]["title"],
-	                                   search_result["id"]["channelId"]))
-	    
-
-	  for i in range(10):
-	  	
-	    try:
-
-	      some = {}	
-	      some['title'] = new_response['items'][i]['snippet']['title']
-	      
-	      some['url'] = "https://www.youtube.com/watch?v="+str(new_response['items'][i]
-	      	['snippet']['resourceId']['videoId'])
-	      elements.append(some)
-	      
-	    except:
-	      pass  
-	 # new_response_list = new_response_list
-
-	  
-	  #print new_response_list  
-
-	  return elements
-
-	  
-  
+	for i in range(10):
+  		try:
+			some = {}	
+			some['title'] = new_response['items'][i]['snippet']['title']
+			some['url'] = "https://www.youtube.com/watch?v="+str(new_response['items'][i]['snippet']['resourceId']['videoId'])elements.append(some)
+		except:
+			pass  
+	return elements
 
 def image_urls():
 	return image_urls_list
 def urls():
-	return urls  
-
-
-
+	return urls
 def start(name):
-
-
 	name = name.replace(' ','')	
-    parts = str(name).split("-")	
-	  
+    parts = str(name).split("-")
     pl_id = country_playlist[name]
 	parts[0] = parts[0].replace(' ','')
-
-	term = 'Popular Right Now - '+parts[0]
-
-	  		
-	args = {'q':term,'regionCode':parts[1],'auth_host_name':'localhost', 
-	  'auth_host_port':[8080, 8090], 'logging_level':'ERROR', 'max_results':25, 
-	  'noauth_local_webserver':False,'pl_id':pl_id}
+	term = 'Popular Right Now - '+parts[0]  		
+	args = {'q':term,'regionCode':parts[1],'auth_host_name':'localhost', 'auth_host_port':[8080, 8090], 'logging_level':'ERROR', 'max_results':25, 'noauth_local_webserver':False,'pl_id':pl_id }
 
 	try:
-	    s = youtube_search(args)
-	    s.insert(0,name)
-	    return s
+		s = youtube_search(args)
+		s.insert(0,name)
+		return s
 	except HttpError, e:
-	    print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
-  
-
-
+		print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
