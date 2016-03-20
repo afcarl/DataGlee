@@ -36,10 +36,10 @@ def Gapminder(request):
 	
 	
 def Youtube(request):
+
     if request.method == 'POST':
     	a = request.POST.get("title", "")
-        
-        s = trial.start(a)
+    	s = trial.start(a)
         a = s[0]
         
     	post1 = playlist.playlist_id()
