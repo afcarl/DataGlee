@@ -12,9 +12,6 @@ from django.shortcuts import render
 import trial
 import playlist
 
-
-
-
 def homepage(request):
 	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
 	return render(request, 'blog/homepage.html',{'posts':posts})
@@ -31,9 +28,6 @@ def IndianRailways(request):
 
 def Gapminder(request):
 	return render(request, 'blog/Gapminder.html')	
-
-
-	
 	
 def Youtube(request):
 	if request.method == 'POST':
