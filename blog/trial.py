@@ -97,7 +97,8 @@ def youtube_search(options):
 		try:
 			some = {}	
 			some['title'] = new_response['items'][i]['snippet']['title']
-			some['url'] = "https://www.youtube.com/watch?v="+str(new_response['items'][i]['snippet']['resourceId']['videoId'])elements.append(some)
+			some['url'] = "https://www.youtube.com/watch?v="+str(new_response['items'][i]['snippet']['resourceId']['videoId'])
+			elements.append(some)
 		except:
 			pass  
 	return elements
