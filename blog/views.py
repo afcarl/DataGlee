@@ -10,6 +10,7 @@ from django.template import loader
 from django.template import RequestContext
 from django.shortcuts import render
 import blog.trial
+import blog.playlist
 import collections
 # from blog.playlist import playlist_id
 
@@ -72,20 +73,20 @@ def playlist_id():
 			'Switzerland-CH',
 			'Taiwan-TW',
 			'UnitedArabEmirates-AE',
-			'UnitedStates-US']
+			'UnitedStates-US',]
 
 	return country_list	
 
 def Youtube(request):
 	if request.method == 'POST':
 		a = request.POST.get("title", "")
-		s = trial.start(a)
+		s = blog.trial.start(a)
 		a = s[0]
-		post1 = playlist_id()
+		post1 = blog.playlist.playlist_id()
 		#Do your stuff ,calling whatever you want from set_gpio.py
 		return render(request, 'blog/Youtube.html',{'post1':post1,'s':s[1:],'a':a})		
 	else:
-		post1 = playlist_id()
+		post1 = blog.playlist.playlist_id()
 		return render(request, 'blog/Youtube.html',{'post1': post1})
 
 
