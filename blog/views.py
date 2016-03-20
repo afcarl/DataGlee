@@ -36,15 +36,13 @@ def Gapminder(request):
 	
 	
 def Youtube(request):
-
-    if request.method == 'POST':
-        a = request.POST.get("title", "")
-        s = trial.start(a)
-        a = s[0]
-        post1 = playlist.playlist_id()
-        #Do your stuff ,calling whatever you want from set_gpio.py
-        return render(request, 'blog/Youtube.html',{'post1':post1,'s':s[1:],'a':a})		
-
-    else:
-    	post1 = playlist.playlist_id()
-        return render(request, 'blog/Youtube.html',{'post1': post1})
+	if request.method == 'POST':
+		a = request.POST.get("title", "")
+		s = trial.start(a)
+		a = s[0]
+		post1 = playlist.playlist_id()
+		#Do your stuff ,calling whatever you want from set_gpio.py
+		return render(request, 'blog/Youtube.html',{'post1':post1,'s':s[1:],'a':a})		
+	else:
+		post1 = playlist.playlist_id()
+		return render(request, 'blog/Youtube.html',{'post1': post1})
