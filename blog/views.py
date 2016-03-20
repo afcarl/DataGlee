@@ -9,8 +9,8 @@ from django.http import JsonResponse
 from django.template import loader
 from django.template import RequestContext
 from django.shortcuts import render
-import trial
-import playlist
+import blog.trial
+import blog.playlist
 
 def homepage(request):
 	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
