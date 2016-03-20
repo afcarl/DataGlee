@@ -9,7 +9,8 @@ from django.http import JsonResponse
 from django.template import loader
 from django.template import RequestContext
 from django.shortcuts import render
-
+import trial
+import playlist
 
 
 
@@ -37,17 +38,17 @@ def Gapminder(request):
 def Youtube(request):
     if request.method == 'POST':
     	a = request.POST.get("title", "")
-        import trial
+        
         s = trial.start(a)
         a = s[0]
-        import playlist
+        
     	post1 = playlist.playlist_id()
         #Do your stuff ,calling whatever you want from set_gpio.py
 
     	return render(request, 'blog/Youtube.html',{'post1':post1,'s':s[1:],'a':a})		
 
     else:
-    	import playlist
+    	
     	post1 = playlist.playlist_id()
     	return render(request, 'blog/Youtube.html',{'post1': post1})
 	
