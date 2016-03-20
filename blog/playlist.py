@@ -1,0 +1,47 @@
+
+import collections
+def playlist_id():
+
+	country_list = [
+			'Argentina-AR',
+            'Australia-AU',
+            'Austria-AT',
+            'Belgium-BE',
+            'Brazil-BR',
+            'Canada-CA',
+            'Chile-CL',
+            'Colombia-CO',
+            'CzechRepublic-CZ',
+            'Egypt-EG',
+            'France-FR',
+            'Germany-DE',
+            'GreatBritain-GB',
+            'HongKong-HK',
+            'Hungary-HU',
+            'India-IN',
+            'Ireland-IE',
+            'Israel-IL',
+            'Italy-IT',
+            'Japan-JP',
+            'Jordan-JO',
+			'Malaysia-MY',
+			'Mexico-MX',
+			'Morocco-MA',
+			'Netherlands-NL',
+			'NewZealand-NZ',
+			'Peru-PE',
+			'Philippines-PH',
+			'Poland-PL',
+			'Russia-RU',
+			'SaudiArabia-SA',
+			'Singapore-SG',
+			'SouthAfrica-ZA',
+			'SouthKorea-KR',
+			'Spain-ES',
+			'Sweden-SE',
+			'Switzerland-CH',
+			'Taiwan-TW',
+			'UnitedArabEmirates-AE',
+			'UnitedStates-US'
+]
+	return country_list

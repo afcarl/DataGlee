@@ -1,10 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post
+from django.http import HttpResponseRedirect, HttpResponse
+from django.http import Http404
 from django.utils import timezone
 from django.db import connections
 from django.db.models import Count
 from django.http import JsonResponse
+from django.template import loader
+from django.template import RequestContext
 from django.shortcuts import render
+
 
 
 
@@ -26,5 +31,23 @@ def IndianRailways(request):
 def Gapminder(request):
 	return render(request, 'blog/Gapminder.html')	
 
-# def gapminder(request):
-# 	return render(render, 'blog/gapminder.html')
+
+	
+	
+def Youtube(request):
+    if request.method == 'POST':
+    	a = request.POST.get("title", "")
+        import trial
+        s = trial.start(a)
+        a = s[0]
+        import playlist
+    	post1 = playlist.playlist_id()
+        #Do your stuff ,calling whatever you want from set_gpio.py
+
+    	return render(request, 'blog/Youtube.html',{'post1':post1,'s':s[1:],'a':a})		
+
+    else:
+    	import playlist
+    	post1 = playlist.playlist_id()
+    	return render(request, 'blog/Youtube.html',{'post1': post1})
+	

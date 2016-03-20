@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+      
+<div>
+      
+
+      {% for post1 in post1 %}
+      
+       
+      <div>{{ post1 }}:
+              <form action= '{% url "Youtube"%}' method="POST">{% csrf_token %}
+                  <input type="submit" value="Toggle" id="toggle" />
+                  
+                  <input type="hidden" name="title" value={{ post1 }} />
+                  {% if a == post1 %}
+            {% for s1 in s %}
+            
+
+                  <p><a href={{s1.url}}>{{s1.title}}</a></p>
+                  </br>
+            {% endfor %}         
+               
+            {% endif %}  
+                  
+              </form>
+
+
+
+            
+            </div> 
+      
+           
+           
+      
+      {% endfor %}       
+      
+      
+ </div>    
+ 
+
+
+{% endblock content %}
