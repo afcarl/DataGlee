@@ -19,26 +19,26 @@ elements = []
 
 country_playlist = {
 			'Argentina-AR':'PLqOwx1vS-4dlenIYc1Qm0OiQpUrKUWbo_',
-            'Australia-AU':'PLPWE2uZOmZQFbnFuZNFFRJcJRxH35qxis',
-            'Austria-AT':'PLrMLyg9tDGAU3OjVm772TayaNi73doDct',
-            'Belgium-BE':'PLBFwpcUbtP9ocPDsCfWoyKnzdRM5rWSvZ',
-            'Brazil-BR':'PLcHQhiTqGSdLg0XMB4EBpmDPjii7KkDwy',
-            'Canada-CA':'PLp12xt0S4J0UYXerKrIPCLTk15ZUzFdKz',
-            'Chile-CL':'PL_NC8HG6tjCECcGjBS390ko-n1iRHnDu8',
-            'Colombia-CO':'PLBAGzwMi_LCwsaXwJ0jOP49eqs-HDG46m',
-            'CzechRepublic-CZ':'PLQZXQIgnJzEqw47j50IeP8A5oF4bcYE6R',
-            'Egypt-EG':'PLx-VLqfbYK4cchuS2q6X8HaBSs52FK7ft',
-            'France-FR':'PLsa-dEwv56FZugrkS346xMx-dBT16uM8v',
-            'Germany-DE':'PL0sHkSjKd2roowJbtmJJdBoCLq4eE6KMP',
-            'GreatBritain-GB':'PL-DfNcB3lim9IZmUXEjE1Ov0Ir1NDa3Yr',
-            'HongKong-HK':'PLWahjRCqyk73VL_rL6Ec0lg5M1jVQhOBs',
-            'Hungary-HU':'PLW80_JNbYOKZolk3GeIA7QTRsrlpRxmyk',
-            'India-IN':'PL_yIBWagYVjyyqx_qPkbat5zufWZOyZEZ',
-            'Ireland-IE':'PLqG_Qt4vmaV0KpH9rG-GeUZZi3fa3k8xS',
-            'Israel-IL':'PLRRIH66XZsffscmrXTyfeyBjQ5ERroM0F',
-            'Italy-IT':'PLw44__SfaGzptvJny_LOJ4WYXZKtGyBv6',
-            'Japan-JP':'None',
-            'Jordan-JO':'PLKju-FQsIypYiX-uHrF2ajlRYkL4l71A9',
+			'Australia-AU':'PLPWE2uZOmZQFbnFuZNFFRJcJRxH35qxis',
+			'Austria-AT':'PLrMLyg9tDGAU3OjVm772TayaNi73doDct',
+			'Belgium-BE':'PLBFwpcUbtP9ocPDsCfWoyKnzdRM5rWSvZ',
+			'Brazil-BR':'PLcHQhiTqGSdLg0XMB4EBpmDPjii7KkDwy',
+			'Canada-CA':'PLp12xt0S4J0UYXerKrIPCLTk15ZUzFdKz',
+			'Chile-CL':'PL_NC8HG6tjCECcGjBS390ko-n1iRHnDu8',
+			'Colombia-CO':'PLBAGzwMi_LCwsaXwJ0jOP49eqs-HDG46m',
+			'CzechRepublic-CZ':'PLQZXQIgnJzEqw47j50IeP8A5oF4bcYE6R',
+			'Egypt-EG':'PLx-VLqfbYK4cchuS2q6X8HaBSs52FK7ft',
+			'France-FR':'PLsa-dEwv56FZugrkS346xMx-dBT16uM8v',
+			'Germany-DE':'PL0sHkSjKd2roowJbtmJJdBoCLq4eE6KMP',
+			'GreatBritain-GB':'PL-DfNcB3lim9IZmUXEjE1Ov0Ir1NDa3Yr',
+			'HongKong-HK':'PLWahjRCqyk73VL_rL6Ec0lg5M1jVQhOBs',
+			'Hungary-HU':'PLW80_JNbYOKZolk3GeIA7QTRsrlpRxmyk',
+			'India-IN':'PL_yIBWagYVjyyqx_qPkbat5zufWZOyZEZ',
+			'Ireland-IE':'PLqG_Qt4vmaV0KpH9rG-GeUZZi3fa3k8xS',
+			'Israel-IL':'PLRRIH66XZsffscmrXTyfeyBjQ5ERroM0F',
+			'Italy-IT':'PLw44__SfaGzptvJny_LOJ4WYXZKtGyBv6',
+			'Japan-JP':'None',
+			'Jordan-JO':'PLKju-FQsIypYiX-uHrF2ajlRYkL4l71A9',
 			'Malaysia-MY':'PLWU3HTMYxVU3kqWgK0Gp7_3t_YQ2inxJL',
 			'Mexico-MX':'PLfk71Rp386qjb5A38Bpatldih9vuX-EpE',
 			'Morocco-MA':'PLsvl4NMyyNiWoswbCufti4XTCFnE_YKIt',
@@ -94,7 +94,7 @@ def youtube_search(options):
 			channels.append("%s (%s)" % (search_result["snippet"]["title"], search_result["id"]["channelId"]))
 
 	for i in range(10):
-  		try:
+		try:
 			some = {}	
 			some['title'] = new_response['items'][i]['snippet']['title']
 			some['url'] = "https://www.youtube.com/watch?v="+str(new_response['items'][i]['snippet']['resourceId']['videoId'])elements.append(some)
@@ -108,8 +108,8 @@ def urls():
 	return urls
 def start(name):
 	name = name.replace(' ','')	
-    parts = str(name).split("-")
-    pl_id = country_playlist[name]
+	parts = str(name).split("-")
+	pl_id = country_playlist[name]
 	parts[0] = parts[0].replace(' ','')
 	term = 'Popular Right Now - '+parts[0]  		
 	args = {'q':term,'regionCode':parts[1],'auth_host_name':'localhost', 'auth_host_port':[8080, 8090], 'logging_level':'ERROR', 'max_results':25, 'noauth_local_webserver':False,'pl_id':pl_id }
