@@ -5,7 +5,16 @@
 
       
 <div>
-      
+      <p>The idea and its implementation (which is still in process) is to see how Youtube trends exist/flow all over the world. Here I have collected the most popular videos via Youtube API trending in each country and plotting it on a globe(soon)... giving rise to a <i>Youtube Globe!</i></p>
+      {% if a == post1 %}
+            {% for s1 in s %}
+            
+
+                  <p><a href={{s1.url}}>{{s1.title}}</a></p>
+                  </br>
+            {% endfor %}         
+               
+            {% endif %} 
 
       {% for post1 in post1 %}
       
