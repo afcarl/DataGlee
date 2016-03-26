@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 #from .models import Post
 from django.shortcuts import render
+from django import forms
 
 class Post(models.Model):
 	author = models.ForeignKey('auth.User')
@@ -16,3 +17,6 @@ class Post(models.Model):
 
 	def __str__(self):
 		return self.title	
+
+class CronForm(forms.Form):
+    days = forms.ChoiceField(choices=[(x, x) for x in range(1, 32)])		

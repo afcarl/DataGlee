@@ -1,0 +1,244 @@
+<script>
+  
+//   var cc;
+//   var t1 = document.getElementById('t').innerHTML
+//   if (t1){
+//     var focusedCountry=t1;
+//     transition();
+//   }
+
+  
+ 
+//   var width = 600,
+//   height = 500,
+//   sens = 0.25,
+//   focused;
+
+//   //Setting projection
+
+//   var projection = d3.geo.orthographic()
+//   .scale(245)
+//   .rotate([0, 0])
+//   .translate([width / 2, height / 2])
+//   .clipAngle(90);
+
+//   var path = d3.geo.path()
+//   .projection(projection);
+
+//   //SVG container
+
+//   var svg = d3.select("#hi").append("svg")
+//   .attr("width", width)
+//   .attr("height", height);
+
+//   //Adding water
+
+//   svg.append("path")
+//   .datum({type: "Sphere"})
+//   .attr("class", "water")
+//   .attr("d", path)
+//   .call(d3.behavior.drag()
+//   .origin(function() { var r = projection.rotate(); return {x: r[0] / sens, y: -r[1] / sens}; })
+//   .on("drag", function() {
+//     var rotate = projection.rotate();
+//     projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+//     svg.selectAll("path.land").attr("d", path);
+//     svg.selectAll(".focused").classed("focused", focused = false);
+//   }));
+
+//   var countryTooltip = d3.select("#hi").append("div").attr("class", "countryTooltip"),
+//   countryList = d3.select("#hi").append("select").attr("name", "countries");
+
+
+//   queue()
+//   .defer(d3.json,"{% static "blog/world.json" %}")
+//   .defer(d3.tsv, "{% static "blog/names.tsv" %}")
+//   .await(ready);
+
+//   //Main function
+
+//   function ready(error, world, countryData) {
+    
+//     var countryById = {},
+//     countries = topojson.feature(world, world.objects.countries).features;
+
+//     //Adding countries to select
+
+//     countryData.forEach(function(d) {
+//       countryById[d.id] = d.name;
+//       option = countryList.append("option");
+//       option.text(d.name);
+//       option.property("value", d.id);
+
+//     });
+
+//     //Drawing countries on the globe
+    
+
+//     var world = svg.selectAll("path.land")
+//     .data(countries)
+//     .enter().append("path")
+//     .attr("class", "land")
+//     .attr("d", path)
+    
+//     //Drag event
+
+//     .call(d3.behavior.drag()
+//       .origin(function() { var r = projection.rotate(); return {x: r[0] / sens, y: -r[1] / sens}; })
+//       .on("drag", function() {
+//         var rotate = projection.rotate();
+//         projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+//         svg.selectAll("path.land").attr("d", path);
+//         svg.selectAll(".focused").classed("focused", focused = false);
+//       }))
+
+//     //Mouse events
+
+//     .on("mouseover", function(d) {
+//       countryTooltip.text(countryById[d.id])
+//       .style("left", (d3.event.pageX + 7) + "px")
+//       .style("top", (d3.event.pageY - 15) + "px")
+//       .style("display", "block")
+//       .style("opacity", 1);
+//     })
+//     .on("mouseout", function(d) {
+//       countryTooltip.style("opacity", 0)
+//       .style("display", "none");
+//     })
+//     .on("mousemove", function(d) {
+//       countryTooltip.style("left", (d3.event.pageX + 7) + "px")
+//       .style("top", (d3.event.pageY - 15) + "px");
+//     });
+
+//     //Country focus on option select
+
+//     d3.select("select").on("change", function() {
+
+//       var rotate = projection.rotate(),
+//       focusedCountry = country(countries, this),
+//       p = d3.geo.centroid(focusedCountry);
+//       console.log(focusedCountry);
+
+      
+      
+//       svg.selectAll(".focused").classed("focused", focused = false);
+
+
+//     //Globe rotating
+
+//     (function transition() {
+//       d3.transition()
+//       .duration(2500)
+//       .tween("rotate", function() {
+//         var r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
+//         return function(t) {
+//           projection.rotate(r(t));
+//           svg.selectAll("path").attr("d", path)
+//           .classed("focused", function(d, i) { return d.id == focusedCountry.id ? focused = d : false; });
+//         };
+//       }
+      
+
+//       )
+//       })();
+    
+//     });
+
+//     function country(cnt, sel) { 
+//       if (sel.value==356){
+//       document.getElementById('ipc').value = 'India-IN'}
+//       else if (sel.value==36){
+//       document.getElementById('ipc').value = 'Australia-AU'}
+//       else if (sel.value==40){
+//       document.getElementById('ipc').value = 'Austria-AT'}
+//       else if (sel.value==56){
+//       document.getElementById('ipc').value = 'Belgium-BE'}
+//       else if (sel.value==76){
+//       document.getElementById('ipc').value = 'Brazil-BR'}
+//       else if (sel.value==124){
+//       document.getElementById('ipc').value = 'Canada-CA'}
+//       else if (sel.value==152){
+//       document.getElementById('ipc').value = 'Chile-CL'}
+//       else if (sel.value==170){
+//       document.getElementById('ipc').value = 'Colombia-CO'}
+//       else if (sel.value==203){
+//       document.getElementById('ipc').value = 'CzechRepublic-CZ'}
+//       else if (sel.value==818){
+//       document.getElementById('ipc').value = 'Egypt-EG'}
+//       else if (sel.value==250){
+//       document.getElementById('ipc').value = 'France-FR'}
+//       else if (sel.value==276){
+//       document.getElementById('ipc').value = 'Germany-DE'}
+//       else if (sel.value==356){
+//       document.getElementById('ipc').value = 'GreatBritain-GB'}
+//       else if (sel.value==348){
+//       document.getElementById('ipc').value = 'Hungary-HU'}
+//       else if (sel.value==356){
+//       document.getElementById('ipc').value = 'India-IN'}
+//       else if (sel.value==372){
+//       document.getElementById('ipc').value = 'Ireland-IE'}
+//       else if (sel.value==376){
+//       document.getElementById('ipc').value = 'Israel-IL'}
+//       else if (sel.value==380){
+//       document.getElementById('ipc').value = 'Italy-IT'}
+//       else if (sel.value==392){
+//       document.getElementById('ipc').value = 'Japan-JP'}
+//       else if (sel.value==400){
+//       document.getElementById('ipc').value = 'Jordan-JO'}
+//       else if (sel.value==458){
+//       document.getElementById('ipc').value = 'Malaysia-MY'}
+//       else if (sel.value==484){
+//       document.getElementById('ipc').value = 'Mexico-MX'}
+//       else if (sel.value==504){
+//       document.getElementById('ipc').value = 'Morocco-MA'}
+//       else if (sel.value==528){
+//       document.getElementById('ipc').value = 'Netherlands-NL'}
+//       else if (sel.value==554){
+//       document.getElementById('ipc').value = 'NewZealand-NZ'}
+//       else if (sel.value==604){
+//       document.getElementById('ipc').value = 'Peru-PE'}
+//       else if (sel.value==608){
+//       document.getElementById('ipc').value = 'Philippines-PH'}
+//       else if (sel.value==616){
+//       document.getElementById('ipc').value = 'Poland-PL'}
+//       else if (sel.value==643){
+//       document.getElementById('ipc').value = 'Russia-RU'}
+//       else if (sel.value==682){
+//       document.getElementById('ipc').value = 'SaudiArabia-SA'}
+//       else if (sel.value==356){
+//       document.getElementById('ipc').value = 'Singapore-SG'}
+//       else if (sel.value==710){
+//       document.getElementById('ipc').value = 'SouthAfrica-ZA'}
+//       else if (sel.value==356){
+//       document.getElementById('ipc').value = 'SouthKorea-KR'}
+//       else if (sel.value==724){
+//       document.getElementById('ipc').value = 'Spain-ES'}
+//       else if (sel.value==752){
+//       document.getElementById('ipc').value = 'Sweden-SE'}
+//       else if (sel.value==756){
+//       document.getElementById('ipc').value = 'Switzerland-CH'}
+//       else if (sel.value==158){
+//       document.getElementById('ipc').value = 'Taiwan-TW'}
+//       else if (sel.value==784){
+//       document.getElementById('ipc').value = 'UnitedArabEmirates-AE'}
+//       else if (sel.value==840){
+//       document.getElementById('ipc').value = 'UnitedStates-US'}
+
+
+
+      
+
+//       for(var i = 0, l = cnt.length; i < l; i++) {
+//         if(cnt[i].id == sel.value) {return cnt[i];}
+//       }
+//     };
+
+//   };
+
+
+
+
+// // if (cc==3){
+// //        document.getElementById('name').value = 'India-IN';
+
+// // }

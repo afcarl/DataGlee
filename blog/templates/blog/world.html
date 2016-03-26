@@ -1,52 +1,20 @@
-{% extends 'blog/base.html' %}
+
 {% load staticfiles %}
 
 {% block content %}
-
-      
-<div >
-     <!--  <p>The idea and its implementation (which is still in process) is to see how Youtube trends exist/flow all over the world. Here I have collected the most popular videos via Youtube API trending in each country and plotting it on a globe(soon)... giving rise to a <i>Youtube Globe!</i></p> -->
-      <script>
-      
-      </script>
-      
-
-
-      <div>
-            {% if a %}
-            <p id ='name'>{{a}}</p>
-            <p id='here'></p>
-            {% for s1 in s %}
-            
-                  
-                  <p><a href={{s1.url}}>{{s1.title}}</a></p>
-                  </br>
-            {% endfor %}         
-            {% endif %}   
-           
-              <form action= '{% url "Youtube"%}' method="POST">{% csrf_token %}
-
-                  <input type='' value="" id="toggle">
-                  
-                  <input id='ipc' type="hidden" name="title" value = 'UnitedStates-US'>
-                  
-            
-              </form>
-
-
-
-            
-            </div> 
-      
-      </div>   
-<div id='hi'></div>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 <script src="http://d3js.org/queue.v1.min.js"></script>
 <script>
-
+  
   var cc;
-  var focusedCountry;
+  var t1 = document.getElementById('t').innerHTML
+  if (t1){
+    var focusedCountry=t1;
+    transition();
+  }
+
+  
  
   var width = 600,
   height = 500,
@@ -113,12 +81,13 @@
 
     //Drawing countries on the globe
     
+
     var world = svg.selectAll("path.land")
     .data(countries)
     .enter().append("path")
     .attr("class", "land")
     .attr("d", path)
-
+    
     //Drag event
 
     .call(d3.behavior.drag()
@@ -150,12 +119,12 @@
 
     //Country focus on option select
 
-   
-
     d3.select("select").on("change", function() {
-      var rotate = projection.rotate();
-      var focusedCountry = country(countries, this);
-      var p = d3.geo.centroid(focusedCountry);
+
+      var rotate = projection.rotate(),
+      focusedCountry = country(countries, this),
+      p = d3.geo.centroid(focusedCountry);
+      console.log(focusedCountry);
 
       
       
@@ -181,14 +150,12 @@
       })();
     
     });
-   
+
     function country(cnt, sel) { 
       if (sel.value==356){
       document.getElementById('ipc').value = 'India-IN'}
-
       else if (sel.value==36){
-      document.getElementById('ipc').value = 'Australia-AU';
-      }
+      document.getElementById('ipc').value = 'Australia-AU'}
       else if (sel.value==40){
       document.getElementById('ipc').value = 'Austria-AT'}
       else if (sel.value==56){
@@ -263,9 +230,6 @@
       document.getElementById('ipc').value = 'UnitedArabEmirates-AE'}
       else if (sel.value==840){
       document.getElementById('ipc').value = 'UnitedStates-US'}
-      else{
-      document.getElementById('here').innerHTML = 'Sorry, No Youtube Trends here, want tp check US ?'}  
-      
 
 
 
@@ -288,4 +252,4 @@
 
 
   </script>
-{% endblock content %}
+ {% endblock content %}

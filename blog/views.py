@@ -12,6 +12,8 @@ from django.shortcuts import render
 import blog.trial
 import blog.playlist
 import collections
+from django import forms
+
 # from blog.playlist import playlist_id
 
 def homepage(request):
@@ -40,10 +42,10 @@ def Youtube(request):
 		a = s[0]
 		post1 = blog.playlist.playlist_id()
 		#Do your stuff ,calling whatever you want from set_gpio.py
-		return render(request, 'blog/Youtube.html',{'post1':post1,'s':s[1:],'a':a})		
+		return render(request, 'blog/Youtube.html',{'post1':post1[0],'s':s[1:],'a':a})		
 	else:
 		post1 = blog.playlist.playlist_id()
-		return render(request, 'blog/Youtube.html',{'post1': post1})
+		return render(request, 'blog/Youtube.html',{'post1': post1[0]})
 
 
 
