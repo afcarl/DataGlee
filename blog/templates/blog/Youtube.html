@@ -26,7 +26,7 @@
            
               <form action= '{% url "Youtube"%}' method="POST">{% csrf_token %}
 
-                  <input type='' value="" id="toggle">
+                  <input type='Submit' value="See the country and enter here" id="toggle">
                   
                   <input id='ipc' type="hidden" name="title" value = 'UnitedStates-US'>
                   
@@ -150,12 +150,10 @@
 
     //Country focus on option select
 
-   
-
     d3.select("select").on("change", function() {
-      var rotate = projection.rotate();
-      var focusedCountry = country(countries, this);
-      var p = d3.geo.centroid(focusedCountry);
+      var rotate = projection.rotate(),
+      focusedCountry = country(countries, this),
+      p = d3.geo.centroid(focusedCountry);
 
       
       
@@ -181,14 +179,13 @@
       })();
     
     });
-   
+
     function country(cnt, sel) { 
       if (sel.value==356){
       document.getElementById('ipc').value = 'India-IN'}
 
       else if (sel.value==36){
-      document.getElementById('ipc').value = 'Australia-AU';
-      }
+      document.getElementById('ipc').value = 'Australia-AU'}
       else if (sel.value==40){
       document.getElementById('ipc').value = 'Austria-AT'}
       else if (sel.value==56){
