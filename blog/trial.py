@@ -119,5 +119,5 @@ def start(name):
 		s = youtube_search(args)
 		s.insert(0,name)
 		return s
-	except e:
+	except HttpError as e:
 		print(e)
