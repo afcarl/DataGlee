@@ -33,8 +33,6 @@ def IndianRailways(request):
 def Gapminder(request):
 	return render(request, 'blog/Gapminder.html')	
 	
-
-
 def Youtube(request):
 	if request.method == 'POST':
 		a = request.POST.get("title", "")
@@ -47,6 +45,9 @@ def Youtube(request):
 		post1 = blog.playlist.playlist_id()
 		return render(request, 'blog/Youtube.html',{'post1': post1[0]})
 
+
+def LGBT_Network(request):
+	return render(request, "https://priyakhokher.github.io/LGBT_Network/")
 
 
 	
