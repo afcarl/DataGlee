@@ -8,7 +8,7 @@ url(r'^yelping$', views.yelping, name='yelping'),
 url(r'^IndianRailways$', views.IndianRailways, name='IndianRailways'),
 url(r'^Gapminder$', views.Gapminder, name='Gapminder'),
 url(r'^Youtube$', views.Youtube, name='Youtube'),
-url(r'^LGBT_Network', views.LGBT_Network, name="LBGT_Network"),
+
 # url(r'^trial$', views.trial, name='trial'),
 
 ]

@@ -46,8 +46,6 @@ def Youtube(request):
 		return render(request, 'blog/Youtube.html',{'post1': post1[0]})
 
 
-def LGBT_Network(request):
-	return render(request, "blog/LGBT_Network.html")
 
 
 	
