@@ -47,7 +47,7 @@ def Youtube(request):
 
 
 def LGBT_Network(request):
-	return render(request, "https://priyakhokher.github.io/LGBT_Network/")
+	return render(request, "blog/LGBT_Network.html")
 
 
 	
