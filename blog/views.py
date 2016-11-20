@@ -46,6 +46,4 @@ def Youtube(request):
 		return render(request, 'blog/Youtube.html',{'post1': post1[0]})
 
 
-
-
 	
